@@ -31,7 +31,7 @@ const createDevice = async (req, res, next) => {
   }
 };
 const getAllDevice = async (req, res) => {
-  const { brand_id, type_id } = req.query;
+  const { brand_id, type_id, limit, page } = req.query;
   console.log(req.query);
   let devices = await _getAllDevice(brand_id, type_id);
   return res.json(devices);
