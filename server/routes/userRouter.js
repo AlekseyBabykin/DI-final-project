@@ -5,9 +5,10 @@ const {
   userCheck,
   userLogin,
 } = require("../controllers/userController.js");
+const authMiddleware = require("../middleware/authMiddleware.js");
 
 u_router.post("/registration", userRegistration);
 u_router.post("/login", userLogin);
-u_router.get("/auth", userCheck);
+u_router.get("/auth", authMiddleware, userCheck);
 
 module.exports = { u_router };

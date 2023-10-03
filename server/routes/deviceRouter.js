@@ -1,5 +1,6 @@
 const express = require("express");
 const d_router = express.Router();
+const checkRole = require("../middleware/checkRoleMiddleware.js");
 const {
   createDevice,
   getAllDevice,
@@ -7,7 +8,7 @@ const {
   deleteDevice,
 } = require("../controllers/deviceController.js");
 
-d_router.post("/", createDevice);
+d_router.post("/", checkRole, createDevice);
 
 d_router.get("/", getAllDevice);
 d_router.get("/:id", getOneDevice);
