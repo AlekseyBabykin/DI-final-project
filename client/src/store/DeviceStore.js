@@ -1,4 +1,3 @@
-import React, { Component } from "react";
 import { makeAutoObservable } from "mobx";
 
 export class DeviceStore {

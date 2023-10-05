@@ -7,7 +7,6 @@ import { DEVICE_ROUTE } from "../utils/consts";
 
 const DeviceItem = ({ device }) => {
   const navigate = useNavigate();
-  console.log(navigate);
   return (
     <Col
       xs={3}
@@ -25,7 +24,7 @@ const DeviceItem = ({ device }) => {
             <BsStarHalf style={{ width: 15, height: 15 }} />
           </div>
         </div>
-        <dev>{device.name}</dev>
+        <div>{device.name}</div>
       </Card>
     </Col>
   );
