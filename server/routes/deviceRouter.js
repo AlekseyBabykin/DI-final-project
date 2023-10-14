@@ -8,7 +8,7 @@ const {
   deleteDevice,
 } = require("../controllers/deviceController.js");
 
-d_router.post("/", checkRole, createDevice);
+d_router.post("/", checkRole("ADMIN"), createDevice);
 
 d_router.get("/", getAllDevice);
 d_router.get("/:id", getOneDevice);

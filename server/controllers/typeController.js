@@ -6,7 +6,8 @@ const {
 } = require("../models/type.models.js");
 
 const createType = async (req, res) => {
-  //   const { name } = req.body;
+  // const { name } = req.body;
+
   const type = await _createType(req.body);
   res.json(type);
 };

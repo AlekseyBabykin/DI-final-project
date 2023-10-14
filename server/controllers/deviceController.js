@@ -16,8 +16,10 @@ const { log } = require("console");
 
 const createDevice = async (req, res, next) => {
   try {
-    const { name, price, brand_id, type_id, info } = req.body;
+    let { name, price, brand_id, type_id, info } = req.body;
+
     const { img } = req.files;
+
     let fileName = uuid.v4() + ".jpg";
     img.mv(path.resolve(__dirname, "..", "static", fileName));
 
@@ -29,11 +31,14 @@ const createDevice = async (req, res, next) => {
       img: fileName,
     });
 
-    if (info) {
-      info = JSON.parse(info);
-      info.forEach((i) => {
-        _createDeviceInfo(i.title, i.description, device.id);
-      });
+    parseinfo = JSON.parse(info);
+
+    if (parseinfo.length !== 0) {
+      info = parseinfo;
+
+      parseinfo.forEach((i) =>
+        _createDeviceInfo(i.title, i.description, device[0].id)
+      );
     }
 
     res.json(device);
@@ -45,15 +50,19 @@ const getAllDevice = async (req, res) => {
   const { brand_id, type_id, limit, page } = req.query;
 
   let devices = await _getAllDevice(brand_id, type_id, limit, page);
-  devices.push({ count: devices.length });
-  return res.json(devices);
+  let allDevices = {};
+  allDevices.count = devices.length;
+  allDevices.rows = devices;
+  return res.json(allDevices);
 };
 
 const getOneDevice = async (req, res) => {
   const id = req.params.id;
   const device = await _getOneDevice(id);
   const device_info = await _getDeviceinfo(device.id);
+  console.log(device);
   device[0].info = device_info;
+  console.log(device);
   res.json(device);
 };
 

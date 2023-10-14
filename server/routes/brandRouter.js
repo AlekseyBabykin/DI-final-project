@@ -6,9 +6,8 @@ const {
   getAllBrand,
   deleteBrand,
 } = require("../controllers/brandController.js");
-const checkRoleMiddleware = require("../middleware/checkRoleMiddleware.js");
 
-b_router.post("/", checkRole, createBrand);
+b_router.post("/", checkRole("ADMIN"), createBrand);
 
 b_router.get("/", getAllBrand);
 b_router.delete("/:id", deleteBrand);
