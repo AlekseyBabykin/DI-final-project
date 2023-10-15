@@ -12,13 +12,18 @@ const DevicePage = () => {
   const { id } = useParams();
 
   useEffect(() => {
+    console.log(1111);
     // fetchOneDevice(id).then((data) => setDevice(data));
     fetchOneDevice(id)
       .then((data) => {
         return data;
       })
-      .then((data2) => setDevice(data2));
+      .then((data2) => {
+        setDevice(data2);
+      });
   }, []);
+  console.log(device);
+  console.log(id);
   return (
     <Container className="mt-3">
       <Row>
@@ -65,7 +70,7 @@ const DevicePage = () => {
       </Row>
       <Row className="d-flex flex-column m-3">
         <h1>Informations device</h1>
-        {device[0].info &&
+        {device[0].info.length > 0 ? (
           device[0].info.map((el, index) => (
             <Row
               key={el.id}
@@ -76,7 +81,10 @@ const DevicePage = () => {
             >
               {el.title}: {el.description}
             </Row>
-          ))}
+          ))
+        ) : (
+          <div>No info available</div>
+        )}
       </Row>
     </Container>
   );

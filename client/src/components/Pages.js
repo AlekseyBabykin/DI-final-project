@@ -5,12 +5,24 @@ import { Pagination } from "react-bootstrap";
 
 const Pages = observer(() => {
   const { device } = useContext(Context);
-  const pages = [1, 2, 3, 4, 5];
+  const pageCount = Math.ceil(device.totalCount / device.limit);
+
+  const pages = [];
+  for (let i = 0; i <= pageCount; i++) {
+    pages.push(i + 1);
+  }
+  console.log(pages);
   return (
     <Pagination className="mt-5">
       {" "}
       {pages.map((el) => (
-        <Pagination.Item>{el}</Pagination.Item>
+        <Pagination.Item
+          key={el}
+          active={device.page === el}
+          onClick={() => device.setPage(el)}
+        >
+          {el}
+        </Pagination.Item>
       ))}
     </Pagination>
   );
