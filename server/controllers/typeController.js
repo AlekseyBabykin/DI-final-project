@@ -19,6 +19,7 @@ const getAllType = async (req, res) => {
 
 const deleteType = async (req, res) => {
   const { id } = req.params;
+  console.log("id=>", id);
   const type = await _deleteType(id);
   res.json(type);
 };

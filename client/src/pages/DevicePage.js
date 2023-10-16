@@ -70,7 +70,7 @@ const DevicePage = () => {
       </Row>
       <Row className="d-flex flex-column m-3">
         <h1>Informations device</h1>
-        {device[0].info.length > 0 ? (
+        {device[0] ? (
           device[0].info.map((el, index) => (
             <Row
               key={el.id}

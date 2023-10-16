@@ -8,8 +8,13 @@ export const createType = async (type) => {
 };
 
 export const fetchTypes = async () => {
-  console.log("I login");
   const { data } = await $host.get("api/type");
+  return data;
+};
+
+export const deleteType = async (id) => {
+  console.log(id);
+  const { data } = await $host.delete("api/type/" + id);
   return data;
 };
 
@@ -22,6 +27,12 @@ export const createBrand = async (brand) => {
 
 export const fetchBrands = async () => {
   const { data } = await $host.get("api/brand");
+  return data;
+};
+
+export const deleteBrand = async (id) => {
+  console.log(id);
+  const { data } = await $host.delete("api/brand/" + id);
   return data;
 };
 
