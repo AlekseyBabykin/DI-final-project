@@ -9,6 +9,8 @@ const createType = async (req, res) => {
   // const { name } = req.body;
 
   const type = await _createType(req.body);
+  console.log("createError");
+
   res.json(type);
 };
 

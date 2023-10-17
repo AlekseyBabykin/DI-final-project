@@ -12,7 +12,6 @@ const DevicePage = () => {
   const { id } = useParams();
 
   useEffect(() => {
-    console.log(1111);
     // fetchOneDevice(id).then((data) => setDevice(data));
     fetchOneDevice(id)
       .then((data) => {
@@ -22,8 +21,7 @@ const DevicePage = () => {
         setDevice(data2);
       });
   }, []);
-  console.log(device);
-  console.log(id);
+
   return (
     <Container className="mt-3">
       <Row>
@@ -70,7 +68,7 @@ const DevicePage = () => {
       </Row>
       <Row className="d-flex flex-column m-3">
         <h1>Informations device</h1>
-        {device[0] ? (
+        {device[0] && device[0].info > 0 ? (
           device[0].info.map((el, index) => (
             <Row
               key={el.id}
