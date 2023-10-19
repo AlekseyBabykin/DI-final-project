@@ -4,7 +4,12 @@ import Nav from "react-bootstrap/Nav";
 import Container from "react-bootstrap/Container";
 import Navbar from "react-bootstrap/Navbar";
 import { NavLink } from "react-router-dom";
-import { ADMIN_ROUTE, LOGIN_ROUTE, SHOP_ROUTE } from "../utils/consts";
+import {
+  ADMIN_ROUTE,
+  BASKET_ROUTE,
+  LOGIN_ROUTE,
+  SHOP_ROUTE,
+} from "../utils/consts";
 import { Button } from "react-bootstrap";
 import { observer } from "mobx-react-lite";
 import { useNavigate } from "react-router-dom";
@@ -16,7 +21,10 @@ const NavBar = observer(() => {
   const logOut = () => {
     user.setUser({});
     user.setIsAuth(false);
+    localStorage.removeItem("userInfo");
+    navigate(LOGIN_ROUTE);
   };
+  console.log();
   return (
     <Navbar bg="dark" variant="dark">
       <Container>
@@ -25,11 +33,21 @@ const NavBar = observer(() => {
         </NavLink>
         {user.isAuth ? (
           <Nav className="ms-auto" style={{ color: "white" }}>
+            {localStorage.getItem("userInfo") &&
+              JSON.parse(localStorage.getItem("userInfo")).role != "USER" && (
+                <Button
+                  variant={"outline-light"}
+                  onClick={() => navigate(ADMIN_ROUTE)}
+                >
+                  Admin display
+                </Button>
+              )}
             <Button
+              className="ms-2"
               variant={"outline-light"}
-              onClick={() => navigate(ADMIN_ROUTE)}
+              onClick={() => navigate(BASKET_ROUTE)}
             >
-              Admin display
+              Basket
             </Button>
             <Button
               className="ms-2"

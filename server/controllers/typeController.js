@@ -9,7 +9,6 @@ const createType = async (req, res) => {
   // const { name } = req.body;
 
   const type = await _createType(req.body);
-  console.log("createError");
 
   res.json(type);
 };
@@ -21,7 +20,7 @@ const getAllType = async (req, res) => {
 
 const deleteType = async (req, res) => {
   const { id } = req.params;
-  console.log("id=>", id);
+
   const type = await _deleteType(id);
   res.json(type);
 };

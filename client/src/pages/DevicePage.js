@@ -4,12 +4,14 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Image from "react-bootstrap/Image";
 import { Button, Card } from "react-bootstrap";
-import { useParams } from "react-router-dom";
-import { fetchOneDevice } from "../http/deviceAPI";
+import { useParams, useNavigate } from "react-router-dom";
+import { createBasketDevice, fetchOneDevice } from "../http/deviceAPI";
+import { SHOP_ROUTE } from "../utils/consts";
 
 const DevicePage = () => {
   const [device, setDevice] = useState({ info: [] });
   const { id } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     // fetchOneDevice(id).then((data) => setDevice(data));
@@ -21,7 +23,14 @@ const DevicePage = () => {
         setDevice(data2);
       });
   }, []);
-
+  const addDeviceInBasket = () => {
+    createBasketDevice({
+      device_id: device[0].id,
+      user_id: JSON.parse(localStorage.getItem("userInfo")).id,
+    }).then((data) => {
+      navigate(SHOP_ROUTE);
+    });
+  };
   return (
     <Container className="mt-3">
       <Row>
@@ -62,13 +71,18 @@ const DevicePage = () => {
             }}
           >
             <h3>from: {device[0] ? device[0].price : ""} dollars. </h3>
-            <Button variant={"outline-dark"}>add basket</Button>
+            <Button
+              variant={"outline-dark"}
+              onClick={() => addDeviceInBasket()}
+            >
+              add basket
+            </Button>
           </Card>
         </Col>
       </Row>
       <Row className="d-flex flex-column m-3">
         <h1>Informations device</h1>
-        {device[0] && device[0].info > 0 ? (
+        {device[0] && device[0].info.length > 0 ? (
           device[0].info.map((el, index) => (
             <Row
               key={el.id}

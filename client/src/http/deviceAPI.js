@@ -55,3 +55,21 @@ export const fetchOneDevice = async (id) => {
 
   return data;
 };
+
+export const createBasketDevice = async (devUserId) => {
+  console.log(devUserId);
+  const { data } = await $host.post("api/basket/", devUserId);
+
+  return data;
+};
+
+export const fetchBasketDevices = async (id) => {
+  const { data } = await $host.get("api/basket/" + id);
+
+  return data;
+};
+
+export const deleteDeviceBasket = async (id) => {
+  const { data } = await $host.delete("api/basket/" + id);
+  return data;
+};

@@ -22,6 +22,7 @@ const Auth = observer(() => {
       console.log("Im auth");
       if (isLogin) {
         data = await login(email, password);
+        localStorage.setItem("userInfo", JSON.stringify(data));
       } else {
         data = await registration(email, password);
       }
@@ -38,7 +39,7 @@ const Auth = observer(() => {
       style={{ height: window.innerHeight - 54 }}
     >
       <Card style={{ width: "600px" }} className="p-5">
-        <h2 className="m-auto">{isLogin ? "Authorization" : "Registration"}</h2>
+        <h2 className="m-auto">{isLogin ? "Login" : "Registration"}</h2>
         <Form className="d-flex flex-column">
           <Form.Control
             className="mt-4"

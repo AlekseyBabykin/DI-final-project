@@ -11,11 +11,11 @@ const DeleteBrand = observer(({ show, onHide }) => {
   const { device } = useContext(Context);
 
   useEffect(() => {
-    fetchBrands().then((data) => device.setTypes(data));
+    fetchBrands().then((data) => device.setBrands(data));
   }, []);
 
   const deleteButtomBrand = () => {
-    deleteBrand(device.selectedType.id).then((data) => onHide());
+    deleteBrand(device.selectedBrand.id).then((data) => onHide());
   };
 
   return (
@@ -28,12 +28,12 @@ const DeleteBrand = observer(({ show, onHide }) => {
       <Modal.Body>
         <Dropdown className="mt-3">
           <Dropdown.Toggle>
-            {device.selectedType.name || "choice a brand"}
+            {device.selectedBrand.name || "choice a brand"}
           </Dropdown.Toggle>
           <Dropdown.Menu>
             {device.brands.map((el) => (
               <Dropdown.Item
-                onClick={() => device.setSelectedType(el)}
+                onClick={() => device.setSelectedBrand(el)}
                 key={el.id}
               >
                 {el.name}

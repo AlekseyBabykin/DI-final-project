@@ -12,6 +12,7 @@ const _createDeviceInfo = async (title, description, device_id) => {
 const _getDeviceinfo = (device_id) => {
   return db("device_info")
     .select("id", "title", "description", "device_id")
+    .where("device_id", device_id)
     .orderBy("device_id");
 };
 

@@ -42,7 +42,7 @@ const userLogin = async (req, res, next) => {
     const { email, password } = req.body;
 
     const user = await _checkUser(email);
-    console.log(user);
+
     if (user.length === 0) {
       return next(ApiError.internal("user don`t exist"));
     }
@@ -50,8 +50,7 @@ const userLogin = async (req, res, next) => {
     if (!comparePassword) {
       return next(ApiError.internal("wrong password"));
     }
-    console.log("user=>", user);
-    console.log({ id: user[0].id, email: user[0].email, role: user[0].role });
+
     const token = jwt.sign(
       { id: user[0].id, email: user[0].email, role: user[0].role },
       process.env.ACCES_TOKEN_SECRET,

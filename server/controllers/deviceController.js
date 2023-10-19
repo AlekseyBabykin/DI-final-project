@@ -17,7 +17,7 @@ const { log } = require("console");
 const createDevice = async (req, res, next) => {
   try {
     let { name, price, brand_id, type_id, info } = req.body;
-
+    console.log(req.body);
     const { img } = req.files;
 
     let fileName = uuid.v4() + ".jpg";
@@ -59,7 +59,8 @@ const getAllDevice = async (req, res) => {
 const getOneDevice = async (req, res) => {
   const id = req.params.id;
   const device = await _getOneDevice(id);
-  const device_info = await _getDeviceinfo(device.id);
+  console.log("device.id", id);
+  const device_info = await _getDeviceinfo(id);
   console.log(device);
   device[0].info = device_info;
   console.log(device);
