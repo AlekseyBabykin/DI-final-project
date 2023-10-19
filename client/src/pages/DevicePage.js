@@ -24,12 +24,18 @@ const DevicePage = () => {
       });
   }, []);
   const addDeviceInBasket = () => {
-    createBasketDevice({
-      device_id: device[0].id,
-      user_id: JSON.parse(localStorage.getItem("userInfo")).id,
-    }).then((data) => {
-      navigate(SHOP_ROUTE);
-    });
+    try {
+      localStorage.getItem("userInfo")
+        ? createBasketDevice({
+            device_id: device[0].id,
+            user_id: JSON.parse(localStorage.getItem("userInfo")).id,
+          }).then((data) => {
+            navigate(SHOP_ROUTE);
+          })
+        : alert("not acess");
+    } catch (err) {
+      alert("err.response.data.massage");
+    }
   };
   return (
     <Container className="mt-3">
