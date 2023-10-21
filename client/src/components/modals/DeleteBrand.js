@@ -14,8 +14,10 @@ const DeleteBrand = observer(({ show, onHide }) => {
     fetchBrands().then((data) => device.setBrands(data));
   }, []);
 
-  const deleteButtomBrand = () => {
+  const deleteButtomBrand = async () => {
     deleteBrand(device.selectedBrand.id).then((data) => onHide());
+    const data = await fetchBrands();
+    device.setBrands(data);
   };
 
   return (

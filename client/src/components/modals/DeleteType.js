@@ -19,8 +19,10 @@ const DeleteType = observer(({ show, onHide }) => {
     fetchTypes().then((data) => device.setTypes(data));
   }, []);
 
-  const deleteDevice = () => {
+  const deleteDevice = async () => {
     deleteType(device.selectedType.id).then((data) => onHide());
+    const data = await fetchTypes();
+    device.setTypes(data);
   };
 
   return (
