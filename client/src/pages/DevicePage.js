@@ -25,7 +25,7 @@ const DevicePage = () => {
   }, []);
   const addDeviceInBasket = () => {
     try {
-      localStorage.getItem("userInfo")
+      localStorage.getItem("token")
         ? createBasketDevice({
             device_id: device[0].id,
             user_id: JSON.parse(localStorage.getItem("userInfo")).id,
